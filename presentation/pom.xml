@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>domain-centric-architecture</groupId>
+        <artifactId>dependency-inversion</artifactId>
+        <version>1.0</version>
+    </parent>
+
+    <artifactId>presentation</artifactId>
+
+    <!-- The layer rule gives the presentation one dependency: the application layer.
+         The other two are listed for the reasons the chapter gives. The domain is
+         here because the entities travel to the screen, and because the exception the
+         library refuses with lives there. The infrastructure is here because the entry
+         point builds the repositories, the clock, and the notifier, and loads the
+         starting state into them. Maven would still supply the domain transitively.
+         It would no longer supply the infrastructure, because the application layer
+         stopped depending on it: this is the one module that chooses the
+         implementations, and the pom says so. -->
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>application</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>infrastructure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>library.presentation.MainWindow</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

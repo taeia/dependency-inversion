@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>domain-centric-architecture</groupId>
+        <artifactId>dependency-inversion</artifactId>
+        <version>1.0</version>
+    </parent>
+
+    <artifactId>infrastructure</artifactId>
+
+    <!-- The infrastructure depends on the domain, as it has since Chapter 3. The arrow
+         is the same. What it carries is a set of contracts to fulfil: the repository
+         interfaces, the clock, and the notifier are declared in the domain, and this
+         module implements every one of them. -->
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>domain</artifactId>
+        </dependency>
+    </dependencies>
+</project>
